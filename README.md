@@ -1,0 +1,2 @@
+# integrador_nt_sabados20262_holo_ia
+Proyecto integrador nuevas tecnologias
