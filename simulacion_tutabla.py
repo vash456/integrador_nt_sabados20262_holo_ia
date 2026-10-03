@@ -69,3 +69,40 @@ def convertir_booleano(valor):
         return random.choice(["SI", "1"])
     else:
         return random.choice(["NO", "0"])
+
+# 7.4 Funcion principal para ensuciar los datos simulacion
+def ensuciar(datos_df):
+    datos_df = datos_df.copy()
+
+    #Nombre al 10% tenga espacios y 8% este en mayuscula
+    filas_elegidas = obtener_muestra(datos_df, 0.10)
+    datos_df.loc[filas_elegidas, "nombre"] = " " + datos_df.loc[filas_elegidas, "nombre"] + " "
+
+    filas_elegidas = obtener_muestra(datos_df, 0.08)
+    datos_df.loc[filas_elegidas, "nombre"] = datos_df.loc[filas_elegidas, "nombre"].str.upper()
+
+    #Correo al 5% de los datos este sin @
+    filas_elegidas = obtener_muestra(datos_df, 0.05)
+    datos_df.loc[filas_elegidas, "correo"] = datos_df.loc[filas_elegidas, "correo"].str.replace("@", "")
+
+    #correo: el 4% de los correos no deberia tener ningun valor (None)
+    filas_elegidas = obtener_muestra(datos_df, 0.04)
+    datos_df.loc[filas_elegidas, "correo"] = None
+
+    #Rol: Aplicar errores de escritura (variantes)
+    filas_elegidas = obtener_muestra(datos_df, 0.1)
+    datos_df.loc[filas_elegidas, "rol"] = datos_df.loc[filas_elegidas, "rol"].map(escribir_mal)
+
+    #Activo: en ocaciones llega SI, NO, 1 , 0
+    datos_df["activo"] = datos_df["activo"].astype(object)
+    filas_elegidas = obtener_muestra(datos_df, 0.15)
+    datos_df.loc[filas_elegidas, "activo"] = datos_df.loc[filas_elegidas, "activo"].map(convertir_booleano)
+
+    #Mezclar el formato de la fecha
+    #ISO => 2026-10-03 YYYY-mm-dd HH:MM:SS
+    #LATINO => d/m/y h:m
+    iso = datos_df["fecha_registro"].dt.strftime("%Y-%m-%d %H:%M:%S")
+    latino = datos_df["fecha_registro"].dt.strftime("%d/%m/%y %H:%M")
+    datos_df["fecha_registro"] = iso
+    filas_elegidas = obtener_muestra(datos_df, 0.25)
+    datos_df.loc[filas_elegidas, "fecha_registro"] = latino.loc[filas_elegidas]
