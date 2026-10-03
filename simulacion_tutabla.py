@@ -52,3 +52,20 @@ tabla_ordenada_usuarios = pd.DataFrame(generar_datos())
 
 # 6. Probar la funcion
 print(tabla_ordenada_usuarios.head(10))
+
+# 7. preparar la simulacion para ensuciar mis datos
+def obtener_muestra(datos, porcentaje):
+    return datos.sample(frac=porcentaje, random_state=random.randint(0, 9999)).index
+
+# 7.2 Funcion auxiliar para cambiar valores de un texto
+def escribir_mal(texto):
+    variantes = [texto.lower(), texto.title(), texto.capitalize(),
+                 f" {texto} ", "Juan Jose"]
+    return random.choice(variantes)
+
+# 7.3 Funcion auxiliar para cambiar los booleanos
+def convertir_booleano(valor):
+    if valor:
+        return random.choice(["SI", "1"])
+    else:
+        return random.choice(["NO", "0"])
