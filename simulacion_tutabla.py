@@ -60,7 +60,7 @@ def obtener_muestra(datos, porcentaje):
 # 7.2 Funcion auxiliar para cambiar valores de un texto
 def escribir_mal(texto):
     variantes = [texto.lower(), texto.title(), texto.capitalize(),
-                 f" {texto} ", "Juan Jose"]
+                 f" {texto} ", "NA"]
     return random.choice(variantes)
 
 # 7.3 Funcion auxiliar para cambiar los booleanos
@@ -76,10 +76,10 @@ def ensuciar(datos_df):
 
     #Nombre al 10% tenga espacios y 8% este en mayuscula
     filas_elegidas = obtener_muestra(datos_df, 0.10)
-    datos_df.loc[filas_elegidas, "nombre"] = " " + datos_df.loc[filas_elegidas, "nombre"] + " "
+    datos_df.loc[filas_elegidas, "name"] = " " + datos_df.loc[filas_elegidas, "name"] + " "
 
     filas_elegidas = obtener_muestra(datos_df, 0.08)
-    datos_df.loc[filas_elegidas, "nombre"] = datos_df.loc[filas_elegidas, "nombre"].str.upper()
+    datos_df.loc[filas_elegidas, "name"] = datos_df.loc[filas_elegidas, "name"].str.upper()
 
     #Correo al 5% de los datos este sin @
     filas_elegidas = obtener_muestra(datos_df, 0.05)
@@ -106,3 +106,10 @@ def ensuciar(datos_df):
     datos_df["fecha_registro"] = iso
     filas_elegidas = obtener_muestra(datos_df, 0.25)
     datos_df.loc[filas_elegidas, "fecha_registro"] = latino.loc[filas_elegidas]
+    
+    return datos_df
+
+if __name__ == "__main__":
+    df_sucio = ensuciar(tabla_ordenada_usuarios)
+    
+    print(df_sucio.head(10))
