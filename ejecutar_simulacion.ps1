@@ -29,11 +29,11 @@ if (Test-Path $activatePs1) {
 
 Write-Host ""
 Write-Host "========================================================" -ForegroundColor Cyan
-Write-Host " Ejecutando: python simulacion_tutabla.py              " -ForegroundColor Cyan
+Write-Host " Ejecutando: python src/simular_usuarios.py          " -ForegroundColor Cyan
 Write-Host "========================================================" -ForegroundColor Cyan
 Write-Host ""
 
-& $pythonVenv simulacion_tutabla.py
+& $pythonVenv src/simular_usuarios.py
 
 Write-Host ""
 Write-Host "========================================================" -ForegroundColor Green
