@@ -2,10 +2,10 @@
 Proyecto integrador nuevas tecnologias
 
 
-Darlin Estrada Patiño
+- Darlin Estrada Patiño
 
-Carolina Bedoya
+- Carolina Bedoya
 
-Juan David Naranjo
+- Juan David Naranjo
 
-Juliana Montes
+- Juliana Montes
