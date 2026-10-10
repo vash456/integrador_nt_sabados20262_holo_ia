@@ -43,12 +43,12 @@ if defined ACTIVATE_BAT call "%ACTIVATE_BAT%"
 echo.
 echo ========================================================
 echo  Interprete: %PYTHON_EXE%
-echo  Ejecutando: python simulacion_tutabla.py
+echo  Ejecutando: python src/simular_usuarios.py
 echo ========================================================
 echo.
 
 :: 4. Ejecutar el script usando directamente el binario del entorno virtual
-"%PYTHON_EXE%" simulacion_tutabla.py
+"%PYTHON_EXE%" src/simular_usuarios.py
 
 :FIN
 echo.
